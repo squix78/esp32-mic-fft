@@ -4,6 +4,9 @@
   Do you like this sample? Support my work by teleporting a coffee to me:
   https://www.paypal.com/paypalme2/squix78/5
 
+  In this blog post I described how the code works: 
+  https://blog.squix.org/2019/08/esp32-esp-eye-browser-based-spectrum-analyzer.html
+
   
 */
 #include <WiFi.h>
