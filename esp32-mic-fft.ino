@@ -211,10 +211,17 @@ void loop() {
 
   // Read multiple samples at once and calculate the sound pressure
 
-  int num_bytes_read = i2s_read_bytes(I2S_PORT, 
-                                      (char *)samples, 
-                                      BLOCK_SIZE,     // the doc says bytes, but its elements.
-                                      portMAX_DELAY); // no timeout
+  size_t num_bytes_read;  
+  esp_err_t read_success = i2s_read(I2S_PORT, 
+                                    (char *)samples, 
+                                    BLOCK_SIZE, 
+                                    &num_bytes_read, 
+                                    portMAX_DELAY);
+
+  if(read_success != ESP_OK){
+    Serial.println("Error reading i2s");
+    return;  //kick out of this loop iteration
+  }
 
   for (uint16_t i = 0; i < BLOCK_SIZE; i++) {
     vReal[i] = samples[i] << 8;
